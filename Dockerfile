@@ -11,12 +11,13 @@ RUN cp $(which dockerize) /usr/local/bin/dockerize
 ##### base-server target #####
 FROM ${BASE_IMAGE} AS base-server
 
-RUN apk upgrade --no-cache
-RUN apk add --no-cache \
+RUN apk add --no-cache --upgrade \
     ca-certificates \
     tzdata \
     bash \
-    curl
+    'curl>=8.14.1-r2' \
+    'libssl3>=3.5.4-r0' \
+    'libcrypto3>=3.5.4-r0'
 
 COPY --from=builder /usr/local/bin/dockerize /usr/local/bin
 
