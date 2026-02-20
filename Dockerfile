@@ -1,8 +1,8 @@
 ARG BASE_IMAGE=alpine:3.22
 
-##### Custom base images with Go 1.25.5 #####
+##### Custom base images with Go 1.25.7 #####
 
-FROM golang:1.25.5-alpine3.22 AS builder
+FROM golang:1.25.7-alpine3.22 AS builder
 
 ARG DOCKERIZE_VERSION=v0.9.9
 RUN go install github.com/jwilder/dockerize@${DOCKERIZE_VERSION}
@@ -25,7 +25,7 @@ COPY --from=builder /usr/local/bin/dockerize /usr/local/bin
 SHELL ["/bin/bash", "-c"]
 
 ##### base-builder target #####
-FROM golang:1.25.5-alpine3.22 AS base-builder
+FROM golang:1.25.7-alpine3.22 AS base-builder
 
 RUN apk upgrade --no-cache
 RUN apk add --no-cache \
